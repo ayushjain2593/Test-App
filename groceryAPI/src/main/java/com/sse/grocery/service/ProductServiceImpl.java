@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sse.grocery.model.Content;
 import com.sse.grocery.model.Product;
 import com.sse.grocery.repository.ProductRepository;
 
@@ -12,41 +13,47 @@ import com.sse.grocery.repository.ProductRepository;
 public class ProductServiceImpl implements ProductService 
 {
 	@Autowired
-	private ProductRepository prodRepo;
+	private ProductRepository repo;
 	
 	@Override
 	public List<Product> getActiveProductsByCategory(String id)
 	{
-		return prodRepo.findProductsByCategoryAndActive(id, true);
+		return repo.findProductsByCategoryAndActive(id, true);
 	}
 	
 	@Override
 	public List<Product> getActiveProductsByBrand(String id)
 	{
-		return prodRepo.findProductsByBrandAndActive(id, true);
+		return repo.findProductsByBrandAndActive(id, true);
 	}
 	
 	@Override
 	public List<Product> getActiveProductsByOffer(String id)
 	{
-		return prodRepo.findProductsByOfferAndActive(id, true);
+		return repo.findProductsByOfferAndActive(id, true);
 	}
 	
 	@Override
-	public List<Product> getActiveProducts(List<String> ids)
+	public List<Content> getActiveProducts(List<String> ids)
 	{
-		return prodRepo.findProductsByIdsAndActive(ids, true);
+		return repo.findProductsByIdsAndActive(ids, true);
 	}
 
 	@Override
-	public Product getProduct(String id) {
-		return prodRepo.findOne(id);
+	public Product getActiveProduct(String id) {
+		//Product prod = repo.findOne(id);
+		//List<Product> productCategory = repo.findProductsByCategoryInAndActive(prod.getCategory(), true, new PageRequest(0, 5)).getContent();
+		//List<Product> productCategory = repo.findProductsByCategoryAndActive(prod.getCategory(), true, 5);
+		//List<Product> productBrand = repo.findProductsByBrandAndActive(prod.getBrand(), true, 5);
+		/*System.out.println(productCategory.size());
+		System.out.println(productBrand.size());*/
+		return repo.findOne(id);
 	}
 
 	@Override
 	public Product saveProduct(Product product) 
 	{
-		return prodRepo.save(product);
+		return repo.save(product);
 	}
 
 }

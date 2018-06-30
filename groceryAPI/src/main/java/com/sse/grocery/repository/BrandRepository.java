@@ -10,8 +10,7 @@ import com.sse.grocery.model.Content;
 
 public interface BrandRepository extends MongoRepository<Brand, String>
 {
-	List<Brand> findBrandByActive(Boolean isActive);
 	@Query("{_id: { $in: ?0 },active: ?1 })")
 	List<Content> findBrandsByIdsAndActive(List<String> ids, Boolean isActive);
-	List<Content> findBrandsByActiveOrderByNameAsc(Boolean isActive);
+	List<Brand> findBrandsByActiveOrderByNameAsc(Boolean isActive);
 }

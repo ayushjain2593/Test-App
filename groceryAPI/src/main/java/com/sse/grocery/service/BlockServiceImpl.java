@@ -6,43 +6,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sse.grocery.model.Block;
-import com.sse.grocery.model.Content;
+import com.sse.grocery.model.enums.Page;
 import com.sse.grocery.repository.BlockRepository;
+import com.sse.grocery.utility.ListUtils;
 
 @Service
 public class BlockServiceImpl implements BlockService 
 {
 	@Autowired
-	private BlockRepository blockRepo;
+	private BlockRepository repo;
 	@Autowired
-	private CategoryService categService;
+	private CategoryService cService;
 	@Autowired
-	private BrandService brandService;
+	private BrandService bService;
 	@Autowired
-	private ProductService productService;
+	private ProductService pService;
 	@Autowired
-	private OfferService offerService;
+	private OfferService oService;
 	
 	@Override
-	public List<Block> getHomeBlockList()
+	public List<Block> getActiveBlockList(Page page)
 	{
-		List<Block> blockList = blockRepo.findBlocksByActiveOrderByBlockNoAsc(true);
-		System.out.println(blockList);
-		for (Block block : blockList) 
+		List<Block> blockList = repo.findBlocksByPageOrderByBlockNoAsc(page);
+		if(ListUtils.hasElements(blockList))
 		{
-			switch (block.getType()) {
-			case 1:
-				block.setContent((List<Content>)(List<?>)categService.getActiveCategories(block.getContentRef()));
-				break;
-			case 2:
-				block.setContent((List<Content>)(List<?>)brandService.getActiveBrands(block.getContentRef()));
-				break;
-			case 3:
-				block.setContent((List<Content>)(List<?>)offerService.getActiveOffers(block.getContentRef()));
-				break;
-			case 4:
-				block.setContent((List<Content>)(List<?>)productService.getActiveProducts(block.getContentRef()));
-				break;
+			for (Block block : blockList) 
+			{
+				switch (block.getType()) 
+				{
+				case 1:
+					block.setContent(cService.getActiveCategories(block.getContentRef()));
+					break;
+				case 2:
+					block.setContent(bService.getActiveBrands(block.getContentRef()));
+					break;
+				case 3:
+					block.setContent(oService.getActiveOffers(block.getContentRef()));
+					break;
+				case 4:
+					block.setContent(pService.getActiveProducts(block.getContentRef()));
+					break;
+				}
 			}
 		}
 		return blockList;
@@ -51,7 +55,7 @@ public class BlockServiceImpl implements BlockService
 	@Override
 	public Block saveBlock(Block block)
 	{
-		return blockRepo.save(block);
+		return repo.save(block);
 	}
 
 }

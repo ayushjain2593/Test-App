@@ -7,11 +7,11 @@ import com.sse.grocery.model.Content;
 
 public interface BrandService 
 {
-	List<Content> getActiveBrands();
+	List<Brand> getActiveBrands();
 	List<Content> getActiveBrands(List<String> ids);
 	
 	
-	Brand getBrand(String id);
+	//Brand getBrand(String id);
 	Brand saveBrand(Brand brand);
 	
 

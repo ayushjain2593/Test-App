@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sse.grocery.model.Block;
+import com.sse.grocery.model.enums.Page;
 import com.sse.grocery.service.BlockService;
 
 @RestController
@@ -17,18 +18,17 @@ import com.sse.grocery.service.BlockService;
 public class HomeController 
 {
 	@Autowired
-	private BlockService blockService;
+	private BlockService service;
 	
 	@GetMapping
-	public List<Block> getHomeBlocks()
+	public List<Block> getActiveHomeBlocks()
 	{
-		return blockService.getHomeBlockList();
+		return service.getActiveBlockList(Page.HOME);
 	}
 	
 	@PostMapping
 	public Block saveBlock(@RequestBody Block block)
 	{
-		return blockService.saveBlock(block);
+		return service.saveBlock(block);
 	}
-
 }

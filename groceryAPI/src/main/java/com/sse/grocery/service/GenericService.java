@@ -1,6 +1,6 @@
 package com.sse.grocery.service;
 
-public interface GenericService {
+public interface GenericService<T, K, I> {
 	
 	
 

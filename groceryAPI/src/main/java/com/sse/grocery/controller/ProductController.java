@@ -18,36 +18,36 @@ import com.sse.grocery.service.ProductService;
 public class ProductController 
 {
 	@Autowired
-	private ProductService prodService;
+	private ProductService service;
 	
 	@GetMapping("/category/{categoryId}")
-	public List<Product> getProductsByCategory(@PathVariable("categoryId") String id)
+	public List<Product> getActiveProductsByCategory(@PathVariable("categoryId") String id)
 	{
-		return prodService.getActiveProductsByCategory(id);
+		return service.getActiveProductsByCategory(id);
 	}
 	
 	@GetMapping("/brand/{brandId}")
-	public List<Product> getProductsByBrand(@PathVariable("brandId") String id)
+	public List<Product> getActiveProductsByBrand(@PathVariable("brandId") String id)
 	{
-		return prodService.getActiveProductsByBrand(id);
+		return service.getActiveProductsByBrand(id);
 	}
 	
 	@GetMapping("/offer/{offerId}")
-	public List<Product> getProductByOffer(@PathVariable("offerId") String id)
+	public List<Product> getActiveProductsByOffer(@PathVariable("offerId") String id)
 	{
-		return prodService.getActiveProductsByOffer(id);
+		return service.getActiveProductsByOffer(id);
 	}
 	
 	@GetMapping("/{productId}")
-	public Product getProduct(@PathVariable("productId") String id)
+	public Product getActiveProduct(@PathVariable("productId") String id)
 	{
-		return prodService.getProduct(id);
+		return service.getActiveProduct(id);
 	}
 	
 	@PostMapping
 	public Product saveProduct(@RequestBody Product product)
 	{
-		return prodService.saveProduct(product);
+		return service.saveProduct(product);
 	}
 
 }

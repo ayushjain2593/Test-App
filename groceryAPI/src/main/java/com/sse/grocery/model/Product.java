@@ -3,36 +3,23 @@ package com.sse.grocery.model;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "product")
-// @JsonIgnoreProperties({ "version", "createdDate", "lastModifiedDate",
-// "active" })
+@TypeAlias("product")
+
 public class Product extends GenericProperties implements Content, Serializable {
 	private static final long serialVersionUID = 1L;
-	/*
-	 * @Id private String id;
-	 */
+
 	private String name;
 	private String about;
 	private List<String> category;
 	private String brand;
+	//@JsonIgnore
 	private List<String> offer;
 	private List<Variant> variant;
-	// private boolean isComboProduct;
 	private String tags;
-	/*
-	 * @Version private Long version;
-	 * 
-	 * @CreatedDate
-	 * 
-	 * @JsonFormat(pattern = "dd-MM-yyyy") private Date createdDate;
-	 * 
-	 * @LastModifiedDate
-	 * 
-	 * @JsonFormat(pattern = "dd-MM-yyyy") private Date lastModifiedDate; private
-	 * Boolean active = true;
-	 */
 
 	public Product() {
 		super();
@@ -42,7 +29,6 @@ public class Product extends GenericProperties implements Content, Serializable 
 	public Product(String name, String about, List<String> category, String brand, List<String> offer,
 			List<Variant> variant, String tags) {
 		super();
-		// this.id = id;
 		this.name = name;
 		this.about = about;
 		this.category = category;
@@ -50,17 +36,8 @@ public class Product extends GenericProperties implements Content, Serializable 
 		this.offer = offer;
 		this.variant = variant;
 		this.tags = tags;
-		/*
-		 * this.version = version; this.createdDate = createdDate; this.lastModifiedDate
-		 * = lastModifiedDate; this.active = active;
-		 */
-	}
 
-	/*
-	 * public String getId() { return id; }
-	 * 
-	 * public void setId(String id) { this.id = id; }
-	 */
+	}
 
 	public String getName() {
 		return name;
@@ -118,24 +95,10 @@ public class Product extends GenericProperties implements Content, Serializable 
 		this.tags = tags;
 	}
 
-	/*
-	 * public Long getVersion() { return version; }
-	 * 
-	 * public void setVersion(Long version) { this.version = version; }
-	 * 
-	 * public Date getCreatedDate() { return createdDate; }
-	 * 
-	 * public void setCreatedDate(Date createdDate) { this.createdDate =
-	 * createdDate; }
-	 * 
-	 * public Date getLastModifiedDate() { return lastModifiedDate; }
-	 * 
-	 * public void setLastModifiedDate(Date lastModifiedDate) {
-	 * this.lastModifiedDate = lastModifiedDate; }
-	 * 
-	 * public Boolean getActive() { return active; }
-	 * 
-	 * public void setActive(Boolean active) { this.active = active; }
-	 */
+	@Override
+	public String toString() {
+		return "Product [name=" + name + ", about=" + about + ", category=" + category + ", brand=" + brand + ", offer="
+				+ offer + ", variant=" + variant + ", tags=" + tags + "]";
+	}
 
 }

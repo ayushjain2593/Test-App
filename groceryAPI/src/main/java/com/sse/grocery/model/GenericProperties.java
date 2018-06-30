@@ -10,7 +10,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({ "version", "createdDate", "lastModifiedDate", "active" })
-public abstract class GenericProperties {
+public abstract class GenericProperties
+{
 	private String id;
 	@Version
 	private Long version;
