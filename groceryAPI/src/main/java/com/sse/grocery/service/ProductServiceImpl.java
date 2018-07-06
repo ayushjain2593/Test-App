@@ -34,6 +34,12 @@ public class ProductServiceImpl implements ProductService
 	}
 	
 	@Override
+	public List<Product> getActiveProductsByCategoryGroup(String groupName)
+	{
+		return repo.findProductsByGroupAndActive(groupName, true);
+	}
+	
+	@Override
 	public List<Content> getActiveProducts(List<String> ids)
 	{
 		return repo.findProductsByIdsAndActive(ids, true);

@@ -34,7 +34,10 @@ public class CategoryServiceImpl implements CategoryService
 		if(ListUtils.hasElements(categList)) 
 		{
 			for (Content category : categList)						//to leave only single level category hierarchy
-				((Category)category).setSubCategory(null);
+			{
+				if(!((Category)category).getSubCategory().isEmpty())
+					((Category)category).getSubCategory().clear();
+			}
 		}
 		return categList;
 	}
@@ -73,10 +76,9 @@ public class CategoryServiceImpl implements CategoryService
 	@Override
 	public Category saveCategory(Category category) 
 	{
-		category.setSubCategory(new ArrayList<Category>());
-		category.setId(null);
-		category.setParent(true);
-		return repo.save(category);
+		/*category.setSubCategory(new ArrayList<Category>());
+		category.setParent(true);*/
+		return saveCategory(category, true);
 	}
 	
 	@Override
@@ -85,12 +87,23 @@ public class CategoryServiceImpl implements CategoryService
 		Category parentCategory = repo.findOne(parentCategoryId);
 		if(parentCategory != null)
 		{
-			category.setId(null);
-			category.setParent(false);
-			saveCategory(category);
+			//category.setParent(false);
+			saveCategory(category, false);
 			parentCategory.getSubCategory().add(category);
 			repo.save(parentCategory);
 		}
+		//else
+			// TODO throw error.
 		return category;
+	}
+	
+	public Category saveCategory(Category category, boolean isParent)
+	{
+		if(category.getSubCategory() == null)
+			category.setSubCategory(new ArrayList<Category>());
+		if(category.getCategoryGroup() == null)
+			category.setCategoryGroup(new ArrayList<String>());
+		category.setParent(isParent);
+		return repo.save(category);
 	}
 }

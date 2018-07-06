@@ -18,6 +18,7 @@ public interface ProductRepository extends MongoRepository<Product, String>
 	List<Product> findProductsByBrandAndActive(String id, Boolean isActive);
 	//@Query("{offer: ?0 ,active: ?1 }")
 	List<Product> findProductsByOfferAndActive(String id, Boolean isActive);
+	List<Product> findProductsByGroupAndActive(String group, Boolean isActive);
 	Product findProductByIdAndActive(String id, Boolean isActive);
 	//Page<Product> findProductsByCategoryInAndActive(List<String> id, Boolean isActive, Pageable pageable);
 	

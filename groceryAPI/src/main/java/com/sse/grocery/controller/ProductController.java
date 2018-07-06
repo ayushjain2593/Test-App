@@ -38,6 +38,12 @@ public class ProductController
 		return service.getActiveProductsByOffer(id);
 	}
 	
+	@GetMapping("/categoryGroup/{groupName}")
+	public List<Product> getActiveProductsByCategoryGroup(@PathVariable("groupName") String groupName)
+	{
+		return service.getActiveProductsByCategoryGroup(groupName);
+	}
+	
 	@GetMapping("/{productId}")
 	public Product getActiveProduct(@PathVariable("productId") String id)
 	{

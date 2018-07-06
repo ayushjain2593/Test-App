@@ -10,6 +10,7 @@ public interface ProductService
 	List<Product> getActiveProductsByCategory(String id);
 	List<Product> getActiveProductsByBrand(String id);
 	List<Product> getActiveProductsByOffer(String id);
+	List<Product> getActiveProductsByCategoryGroup(String groupName);
 	List<Content> getActiveProducts(List<String> ids);
 	
 	Product getActiveProduct(String id);

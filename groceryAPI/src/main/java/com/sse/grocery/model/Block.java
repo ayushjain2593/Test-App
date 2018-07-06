@@ -117,4 +117,89 @@ public class Block extends GenericProperties implements Serializable {
 	public void setContentRef(List<String> contentRef) {
 		this.contentRef = contentRef;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + blockNo;
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((contentRef == null) ? 0 : contentRef.hashCode());
+		result = prime * result + ((isNameVisible == null) ? 0 : isNameVisible.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((orientation == null) ? 0 : orientation.hashCode());
+		result = prime * result + ((page == null) ? 0 : page.hashCode());
+		result = prime * result + ((showLimit == null) ? 0 : showLimit.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof Block)) {
+			return false;
+		}
+		Block other = (Block) obj;
+		if (blockNo != other.blockNo) {
+			return false;
+		}
+		if (content == null) {
+			if (other.content != null) {
+				return false;
+			}
+		} else if (!content.equals(other.content)) {
+			return false;
+		}
+		if (contentRef == null) {
+			if (other.contentRef != null) {
+				return false;
+			}
+		} else if (!contentRef.equals(other.contentRef)) {
+			return false;
+		}
+		if (isNameVisible == null) {
+			if (other.isNameVisible != null) {
+				return false;
+			}
+		} else if (!isNameVisible.equals(other.isNameVisible)) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		if (orientation != other.orientation) {
+			return false;
+		}
+		if (page != other.page) {
+			return false;
+		}
+		if (showLimit == null) {
+			if (other.showLimit != null) {
+				return false;
+			}
+		} else if (!showLimit.equals(other.showLimit)) {
+			return false;
+		}
+		if (type == null) {
+			if (other.type != null) {
+				return false;
+			}
+		} else if (!type.equals(other.type)) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+
 }

@@ -59,4 +59,60 @@ public class Brand extends GenericProperties implements Content, Serializable {
 		this.discount = discount;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((about == null) ? 0 : about.hashCode());
+		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
+		result = prime * result + ((imgurl == null) ? 0 : imgurl.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof Brand)) {
+			return false;
+		}
+		Brand other = (Brand) obj;
+		if (about == null) {
+			if (other.about != null) {
+				return false;
+			}
+		} else if (!about.equals(other.about)) {
+			return false;
+		}
+		if (discount == null) {
+			if (other.discount != null) {
+				return false;
+			}
+		} else if (!discount.equals(other.discount)) {
+			return false;
+		}
+		if (imgurl == null) {
+			if (other.imgurl != null) {
+				return false;
+			}
+		} else if (!imgurl.equals(other.imgurl)) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+
 }
